@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var fs = require('fs');
 var del = require('del');
+var resolveModuleFile = require('./utils').resolveModuleFile;
 
 // global state for locale:each:data
 var localeData; // array of virtual files that gulp-file accepts
@@ -69,7 +70,7 @@ gulp.task('locale:each:data', function() {
 	localeData = [];
 	skippedLocaleCodes = [];
 
-	return gulp.src('node_modules/moment/locale/*.js')
+	return gulp.src(resolveModuleFile('moment', 'locale/*.js'))
 		.pipe(modify({
 			fileModifier: function(file, momentContent) {
 				var localeCode = file.path.match(/([^\/\\]*)\.js$/)[1];
@@ -203,7 +204,7 @@ function getDatepickerLocaleJS(localeCode, targetLocaleCode) {
 		return '-' + m1.toUpperCase();
 	});
 
-	var path = 'node_modules/components-jqueryui/ui/i18n/datepicker-' + datepickerLocaleCode + '.js';
+	var path = resolveModuleFile('components-jqueryui', 'ui/i18n/datepicker-' + datepickerLocaleCode + '.js');
 	var js;
 
 	try {
