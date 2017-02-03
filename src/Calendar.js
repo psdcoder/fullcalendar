@@ -270,6 +270,7 @@ function Calendar_constructor(element, overrides) {
 	// -----------------------------------------------------------------------------------
 
 	t.render = render;
+	t.rerender = reinitView();
 	t.destroy = destroy;
 	t.rerenderEvents = rerenderEvents;
 	t.changeView = renderView; // `renderView` will switch to another view
